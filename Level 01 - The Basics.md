@@ -33,6 +33,5 @@ Once more using ls to check `Arena` for the files:
 
 ### The level is complete - onto the next!
 
-https://giphy.com/gifs/nhl-sports-hockey-fan-t3sZxY5zS5B0z5zMIz
 
   
