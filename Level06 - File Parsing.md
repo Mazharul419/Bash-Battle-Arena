@@ -98,7 +98,12 @@ A few lessons here:
  3. The parameter `$1` has double quotation marks on it when referenced - only exception to this is when it is within a set of double quotation marks in which case it is single to avoid closing it.
  4. The line count command is defined as LINE_COUNT and references using $ in an echo command so this can be printed to the user - so they know the number of lines - this is something I was stuck on.
 
-### The level is complete - onto the next!
+To test if I truly learnt my lesson - I attempted to recreate the same file using the lessons above:
 
+<img width="1077" height="569" alt="image" src="https://github.com/user-attachments/assets/8f780691-5a74-44f8-82d9-ff56a95d5d21" />
 
-  
+Testing results in:
+
+<img width="1133" height="303" alt="image" src="https://github.com/user-attachments/assets/3861c1bf-3bcb-4feb-b1c6-3419c0855d4a" />
+
+### The script is correct and the level is complete - onto the next!
