@@ -76,7 +76,27 @@ I recieved the following error message:
 
 I attempted to debug - but do not see what I did wrong - I already spent a lot of time on this so I will compare my solution to the correct one:
 
+        #!/bin/bash
 
+        if [ -z "$1" ]; then
+            echo "No file provided"
+            exit 1
+        fi
+        
+        if [ ! -f "$1" ]; then
+            echo "File not found!"
+            exit 1
+        fi
+        
+        LINE_COUNT=$(wc -l < "$1")
+        echo "The file '$1' has $LINE_COUNT lines."
+
+A few lessons here:
+
+ 1. I did not add `if` statements denoting the possibilities of the file not being provided or it not being a regular file (or existing at all!)
+ 2. Function was not used - though clarification is needed what a function would look like.
+ 3. The parameter `$1` has double quotation marks on it when referenced - only exception to this is when it is within a set of double quotation marks in which case it is single to avoid closing it.
+ 4. The line count command is defined as LINE_COUNT and references using $ in an echo command so this can be printed to the user - so they know the number of lines - this is something I was stuck on.
 
 ### The level is complete - onto the next!
 
