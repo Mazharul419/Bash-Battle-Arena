@@ -5,22 +5,73 @@
 
 <br><br>
 
+This level got extremely complicated - I looked at online forums and it was still very confusing.
 
+This was my solution:
+
+    #!/bin/bash                                                                                                                                                                                                                    
+    dir_path="${1:-.}"                                                                                                                                                                                                             
+    Sort_dir=$( find "$dir_path" -type f -name "*.txt" )
+    echo "'$Sort_dir'"  
+
+I therefore had a look at the solution below: 
+
+    #!/bin/bash
+
+    DIRECTORY="Arena"
+
+    if [ ! -d "$DIRECTORY" ]; then
+        echo "Directory does not exist."
+        exit 1
+    fi
+    
+    find "$DIRECTORY" -type f -name "*.txt" -exec ls -lh {} + | sort -k 5,5 -h | awk '{ print $5, $9 }'
+
+but I will try to understand it and break it down as best as I can:
 
 <br>
 
-## 1. 
+## 1. Shebang and directory definition
 
+      #!/bin/bash
+
+      DIRECTORY="Arena"
+        
+The first part is simply the shebang line `#!/bin/bash` to ensure bash shell inteprets the script. The directory is a parameter defined as the `Arena` directory.
+
+  
+<br>
+
+## 2. if statement
+
+    if [ ! -d "$DIRECTORY" ]; then
+        echo "Directory does not exist."
+        exit 1
+    fi
+
+the if statement accounts for the scenario if there is no directory defined/directory doesn't exist.
+
+`[ ]` is the test command
+`-d` is directory
+`!` inverts the logic
+
+in other words `[ ! -d $DIRECTORY ]` tests if the `$DIRECTORY` parameter is NOT a directory.
+
+for debugging the `echo` command simply prints the error message stating the directory doesn't exist and has an exit code of 1.
 
 <br>
 
-## 2. 
+## 3. find and ls command
 
+    find "$DIRECTORY" -type f -name "*.txt" -exec ls -lh {} + 
 
+The find command looks for files only using `-type f`
+Specifying all `.txt` files using `-name "*.txt"`
 
-<br>
-
-## 3. 
+The `-exec` command executes the below command from each result of `file` commmand
+`ls -lh` lists the files in long-list formatting, with human-readable file sizes (kb,mb, etc.)
+`{}` is a placeholder that is replaced with matching files
+`+` runs the ls command once with many files passed as arguments - as opposed to once per file - increasing speed of command execution
 
 
 ## 4. 
