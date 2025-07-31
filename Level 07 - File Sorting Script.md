@@ -63,19 +63,53 @@ for debugging the `echo` command simply prints the error message stating the dir
 
 ## 3. find and ls command
 
+The command is tricky:
+
     find "$DIRECTORY" -type f -name "*.txt" -exec ls -lh {} + 
 
-The find command looks for files only using `-type f`
-Specifying all `.txt` files using `-name "*.txt"`
+a. `find` command
 
-The `-exec` command executes the below command from each result of `file` commmand
-`ls -lh` lists the files in long-list formatting, with human-readable file sizes (kb,mb, etc.)
-`{}` is a placeholder that is replaced with matching files
-`+` runs the ls command once with many files passed as arguments - as opposed to once per file - increasing speed of command execution
+    find "$DIRECTORY" -type f -name "*.txt"
+    
+* `find -type f` for files only
+* `-name "*.txt"` specifies all `.txt` files
 
+> output so far:
 
-## 4. 
+    Arena/warrior.txt
+    Arena/mage.txt
+    Arena/archer.txt
 
+b. `ls` command
+     
+      -exec ls -lh {} +
+
+* The `-exec` command executes the below command from each result of `find` commmand
+* `ls -lh` lists the files in long-list formatting, with human-readable file sizes (kb,mb, etc.)
+* `{}` is a placeholder that is replaced with matching files
+* `+` runs the ls command once with many files passed as arguments - as opposed to once per file - increasing speed of command execution
+
+> output so far:
+
+    -rw-r--r-- 1 maz239 maz239 0 Jul 31 11:04 Arena/archer.txt
+    -rw-r--r-- 1 maz239 maz239 0 Jul 31 11:04 Arena/mage.txt
+    -rw-r--r-- 1 maz239 maz239 0 Jul 31 11:04 Arena/warrior.txt    
+
+## 4. sort command
+
+    | sort -k 5,5 -h
+
+The `-k` option sorts the file by key i.e., the column. Since size is the 5th column this is set to `5`.
+
+The `-h` sorts taking into account the human-readable sizes i.e., kb, mb
+
+the output from the find and ls command are piped into the sort command
+
+5. awk command
+
+        | awk '{ print $5, $9 }'
+
+The `awk` command prints the 5th and 9th columns, size and file name out of the `ls` command
 
 ## AWESOME!!!
 
