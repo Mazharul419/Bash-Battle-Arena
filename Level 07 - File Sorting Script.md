@@ -105,11 +105,27 @@ The `-h` sorts taking into account the human-readable sizes i.e., kb, mb
 
 the output from the find and ls command are piped into the sort command
 
-5. awk command
+## 5. awk command
 
-        | awk '{ print $5, $9 }'
+    | awk '{ print $5, $9 }'
 
 The `awk` command prints the 5th and 9th columns, size and file name out of the `ls` command
+
+6. Final commmand
+
+The final command is:
+
+    #!/bin/bash
+
+    DIRECTORY="Arena"
+
+    if [ ! -d "$DIRECTORY" ]; then
+        echo "Directory does not exist."
+        exit 1
+    fi
+    
+    find "$DIRECTORY" -type f -name "*.txt" -exec ls -lh {} + | sort -k 5,5 -h | awk '{ print $5, $9 }'
+
 
 ## AWESOME!!!
 
